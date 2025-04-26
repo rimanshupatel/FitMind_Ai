@@ -1,5 +1,6 @@
 import { UserResource } from "@clerk/types";
 import CornerElements from "./cornerElements";
+import Image from "next/image";
 
 const ProfileHeader = ({ user }: { user: UserResource | null | undefined }) => {
   if (!user) return null;
@@ -11,7 +12,7 @@ const ProfileHeader = ({ user }: { user: UserResource | null | undefined }) => {
         <div className="relative">
           {user.imageUrl ? (
             <div className="relative w-24 h-24 overflow-hidden rounded-lg">
-              <img
+              <Image
                 src={user.imageUrl}
                 alt={user.fullName || "Profile"}
                 className="w-full h-full object-cover"

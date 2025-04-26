@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/accordion";
 import NoFitnessPlan from "@/components/NoFitnessPlan";
 
-const page = () => {
+const Page = () => {
   const { user } = useUser();
   const userId = user?.id as string;
 
@@ -220,4 +220,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

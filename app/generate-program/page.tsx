@@ -4,44 +4,38 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { vapi } from "@/lib/vapi";
 import { useUser } from "@clerk/nextjs";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+
+// Define types for the message and error objects
+type Message = {
+  type: string;
+  transcriptType?: string;
+  transcript?: string;
+  role: string;
+  content?: string;
+};
+
+type VapiError = {
+  message: string;
+  code?: number;
+  // Add other error properties as needed
+};
 
 const GenerateProgramPage = () => {
   const [callActive, setCallActive] = useState(false);
   const [connecting, setConnecting] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messages, setMessages] = useState<
+    Array<{ content: string; role: string }>
+  >([]);
   const [callEnded, setCallEnded] = useState(false);
 
   const { user } = useUser();
   const router = useRouter();
 
   const messageContainerRef = useRef<HTMLDivElement>(null);
-
-  // SOLUTION to get rid of "Meeting has ended" error
-  // useEffect(() => {
-  //   const originalError = console.error;
-  //   // override console.error to ignore "Meeting has ended" errors
-  //   console.error = function (msg, ...args) {
-  //     if (
-  //       msg &&
-  //       (msg.includes("Meeting has ended") ||
-  //         (args[0] && args[0].toString().includes("Meeting has ended")))
-  //     ) {
-  //       console.log("Ignoring known error: Meeting has ended");
-  //       return; // don't pass to original handler
-  //     }
-
-  //     // pass all other errors to the original handler
-  //     return originalError.call(console, msg, ...args);
-  //   };
-
-  //   // restore original handler on unmount
-  //   return () => {
-  //     console.error = originalError;
-  //   };
-  // }, []);
 
   // auto-scroll messages
   useEffect(() => {
@@ -88,15 +82,23 @@ const GenerateProgramPage = () => {
       console.log("AI stopped Speaking");
       setIsSpeaking(false);
     };
-    const handleMessage = (message: any) => {
-      if (message.type === "transcript" && message.transcriptType === "final") {
+
+    const handleMessage = (message: Message) => {
+      if (
+        message.type === "transcript" &&
+        message.transcriptType === "final" &&
+        message.transcript
+      ) {
         const newMessage = { content: message.transcript, role: message.role };
         setMessages((prev) => [...prev, newMessage]);
       }
     };
 
-    const handleError = (error: any) => {
-      console.log("Vapi Error", error);
+    const handleError = (error: VapiError) => {
+      console.log("Vapi Error", error.message);
+      if (error.code) {
+        console.log("Error code:", error.code);
+      }
       setConnecting(false);
       setCallActive(false);
     };
@@ -201,7 +203,7 @@ const GenerateProgramPage = () => {
 
                 <div className="relative w-full h-full rounded-full bg-card flex items-center justify-center border border-border overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-secondary/10"></div>
-                  <img
+                  <Image
                     src="/ai-avatar.png"
                     alt="AI Assistant"
                     className="w-full h-full object-cover"
@@ -247,12 +249,15 @@ const GenerateProgramPage = () => {
             <div className="aspect-video flex flex-col items-center justify-center p-6 relative">
               {/* User Image */}
               <div className="relative size-32 mb-4">
-                <img
-                  src={user?.imageUrl}
-                  alt="User"
-                  // ADD THIS "size-full" class to make it rounded on all images
-                  className="size-full object-cover rounded-full"
-                />
+                {user?.imageUrl && (
+                  <Image
+                    src={user.imageUrl}
+                    alt="User"
+                    width={128}
+                    height={128}
+                    className="size-full object-cover rounded-full"
+                  />
+                )}
               </div>
 
               <h2 className="text-xl font-bold text-foreground">You</h2>
