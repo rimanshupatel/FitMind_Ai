@@ -100,7 +100,11 @@ const UserPrograms = () => {
                     <Image
                       src={program.profilePic}
                       alt={`${program.first_name}`}
-                      className="h-full w-full object-cover"
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 30vw, 20vw"
+                      className="object-cover"
+                      priority={false} // Set to true if above the fold
+                      width={100}
+                      height={100}
                     />
                   </div>
                   <div>

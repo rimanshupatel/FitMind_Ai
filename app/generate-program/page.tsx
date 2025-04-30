@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { vapi } from "@/lib/vapi";
 import { useUser } from "@clerk/nextjs";
+import { UserIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -202,11 +203,14 @@ const GenerateProgramPage = () => {
                 />
 
                 <div className="relative w-full h-full rounded-full bg-card flex items-center justify-center border border-border overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-secondary/10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-secondary/10 z-10"></div>
                   <Image
                     src="/ai-avatar.png"
                     alt="AI Assistant"
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                    priority
                   />
                 </div>
               </div>
@@ -248,15 +252,24 @@ const GenerateProgramPage = () => {
           >
             <div className="aspect-video flex flex-col items-center justify-center p-6 relative">
               {/* User Image */}
-              <div className="relative size-32 mb-4">
-                {user?.imageUrl && (
+              <div className="relative aspect-square size-24 md:size-32 mb-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+                {user?.imageUrl ? (
                   <Image
                     src={user.imageUrl}
-                    alt="User"
-                    width={128}
-                    height={128}
-                    className="size-full object-cover rounded-full"
+                    alt={`${user.username || "User"} profile picture`}
+                    fill
+                    sizes="(max-width: 640px) 96px, 128px"
+                    className="object-cover"
+                    priority={false}
+                    onError={(e) => {
+                      e.currentTarget.src = "/default-avatar.png"; // Fallback image
+                    }}
                   />
+                ) : (
+                  <div className="size-full flex items-center justify-center text-gray-500">
+                    <UserIcon className="size-1/2" />{" "}
+                    {/* Using Lucide or similar icon */}
+                  </div>
                 )}
               </div>
 
