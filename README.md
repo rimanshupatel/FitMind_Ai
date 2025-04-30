@@ -4,7 +4,9 @@
 Welcome to **FitMind AI**, an intelligent, voice-first fitness assistant that adapts to you. Just speak — and let AI do the rest. FitMind AI generates personalized workout and meal plans through voice interaction, helping you stay consistent, motivated, and in control of your fitness journey.
 
 ---
-
+## 🚀 Live Demo  
+## [FitMind Ai](fit-mind-ai.vercel.app)
+--- 
 ## 🌟 Highlights
 
 - 🎙️ Voice-based sign-in and onboarding with AI agent
