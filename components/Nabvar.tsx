@@ -2,7 +2,13 @@
 import React from "react";
 
 import { SignInButton, SignUpButton, UserButton, useUser } from "@clerk/nextjs";
-import { DumbbellIcon, HomeIcon, UserIcon, ZapIcon } from "lucide-react";
+import {
+  DumbbellIcon,
+  HomeIcon,
+  Music2,
+  UserIcon,
+  ZapIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
 
@@ -33,6 +39,13 @@ const Nabvar = () => {
                 <span>Home</span>
               </Link>
 
+              <Link
+                href="/mindwellness"
+                className="flex items-center gap-1.5 text-sm hover:text-primary transition-colors"
+              >
+                <Music2 size={16} />
+                <span>MindWellnessMusic</span>
+              </Link>
               <Link
                 href="/generate-program"
                 className="flex items-center gap-1.5 text-sm hover:text-primary transition-colors"
