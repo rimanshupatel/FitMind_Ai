@@ -17,7 +17,7 @@ const Nabvar = () => {
             <ZapIcon className="w-4 h-4 text-primary" />
           </div>
           <span className="text-xl font-bold font-mono">
-            Fit<span className="text-primary">Mind</span>.ai
+            Fit<span className="text-primary">Verse</span>.ai
           </span>
         </Link>
 

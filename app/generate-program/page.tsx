@@ -205,7 +205,7 @@ const GenerateProgramPage = () => {
                 <div className="relative w-full h-full rounded-full bg-card flex items-center justify-center border border-border overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-secondary/10 z-10"></div>
                   <Image
-                    src="/ai-avatar.png"
+                    src="/hero-ai4.png"
                     alt="AI Assistant"
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -215,7 +215,7 @@ const GenerateProgramPage = () => {
                 </div>
               </div>
 
-              <h2 className="text-xl font-bold text-foreground">CodeFlex AI</h2>
+              <h2 className="text-xl font-bold text-foreground">FitVerse AI</h2>
               <p className="text-sm text-muted-foreground mt-1">
                 Fitness & Diet Coach
               </p>

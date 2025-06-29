@@ -96,7 +96,7 @@ export default function Home() {
                 <div className="relative overflow-hidden rounded-lg bg-cyber-black size-full">
                   <div className="relative w-full aspect-[3/1] min-h-[300px] md:min-h-[700px]">
                     <Image
-                      src="/hero-ai3.png"
+                      src="/hero-ai4.png"
                       alt="AI Fitness Coach"
                       fill
                       sizes="(min-width: 1280px) 1280px, 100vw"

@@ -16,11 +16,11 @@ const Footer = () => {
                 <ZapIcon className="w-4 h-4 text-primary" />
               </div>
               <span className="text-xl font-bold font-mono">
-                Fit<span className="text-primary">Mind</span>.ai
+                Fit<span className="text-primary">Verse</span>.ai
               </span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} FitMind.ai - All rights reserved
+              © {new Date().getFullYear()} FitVerse.ai - All rights reserved
             </p>
           </div>
 
